@@ -2,3 +2,4 @@ torch
 flask
 torchvision
 pillow
+flask_cors

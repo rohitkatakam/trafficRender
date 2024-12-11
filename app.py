@@ -1,11 +1,19 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import torch
 from CNN import CNN
 from torchvision import transforms
 from PIL import Image
 import io
+import os
 
 app = Flask(__name__)
+
+# allow who to access
+if os.environ.get('FLASK_ENV') == 'dev':
+    CORS(app)
+else:
+    CORS(app, resources={r"/predict": {"origins": "https://somedomain.com"}})
 
 # Load model
 model = CNN(output_classes=15)
@@ -42,4 +50,4 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run()
