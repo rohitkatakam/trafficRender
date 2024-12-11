@@ -13,7 +13,7 @@ app = Flask(__name__)
 if os.environ.get('FLASK_ENV') == 'dev':
     CORS(app)
 else:
-    CORS(app, resources={r"/predict": {"origins": "https://somedomain.com"}})
+    CORS(app, resources={r"/predict": {"origins": "http://traffic-teal.vercel.app/"}})
 
 # Load model
 model = CNN(output_classes=15)
